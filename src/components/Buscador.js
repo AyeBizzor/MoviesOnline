@@ -4,6 +4,9 @@ export const Buscador = ({listadoState, setListadoState}) => {
 
 
   const [busqueda, setBusqueda] = useState('');
+  const [noEncontrado, setNoEncontrado] = useState(false);
+
+
   const buscarPeli = (e) => {
     //Crear estado y actualizarlo para obtener esa palabra
       setBusqueda(e.target.value);
@@ -14,9 +17,16 @@ export const Buscador = ({listadoState, setListadoState}) => {
       return peli.titulo?.toLowerCase().includes(busqueda.toLocaleLowerCase());
     });
 
-    if(busqueda.length<=1){
-      pelisEncontradas = JSON.parse(localStorage.getItem("pelis"))
+    if(busqueda.length<=1 || pelisEncontradas <= 0){
+      pelisEncontradas = JSON.parse(localStorage.getItem("pelis"));
+      setNoEncontrado(true);
+    } else {
+
+      setNoEncontrado(false);
     }
+
+    
+
 
     //console.log(pelisEncontradas);
 
@@ -33,6 +43,9 @@ export const Buscador = ({listadoState, setListadoState}) => {
     <>
     <div className="search" >
        <h3 className="tittle" >¿Qué estás buscando?</h3>
+
+       { (noEncontrado === true && busqueda.length > 3)  && (
+       <span className='no-encontrado'>No se ha encontrado ninguna coincidencia para tu búsqueda</span> )}
        <form>
            <input type="text" 
            id="search_field"
