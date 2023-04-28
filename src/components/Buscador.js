@@ -8,25 +8,22 @@ export const Buscador = ({listadoState, setListadoState}) => {
     //Crear estado y actualizarlo para obtener esa palabra
       setBusqueda(e.target.value);
       console.log(busqueda)
+    
+    //aca pego lo que borre
+    let pelisEncontradas = listadoState.filter(peli=>{
+      return peli.titulo?.toLowerCase().includes(busqueda.toLocaleLowerCase());
+    });
 
-    //El listado completo de pelis
+    if(busqueda.length<=1){
+      pelisEncontradas = JSON.parse(localStorage.getItem("pelis"))
+    }
 
-    console.log(listadoState)
+    //console.log(pelisEncontradas);
 
-    //Filtrarlo para tener la coincidencia con lo q busco
-   let pelis_encontradas = listadoState.filter(peli => {
-    return peli.titulo.toLowerCase().includes(busqueda.toLocaleLowerCase());
-   });
-    //Comprobar 
- if(busqueda.length <= 1){
-   pelis_encontradas = JSON.parse(localStorage.getItem("pelis"));
- }
- // 
- console.log(pelis_encontradas)
+   setListadoState(pelisEncontradas)
 
-    //Actualizar el estado del listado principal con lo que filtré
 
-  setListadoState();
+    //hasta aca
   }
 
 

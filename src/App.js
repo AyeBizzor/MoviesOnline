@@ -38,8 +38,8 @@ function App() {
 {/*Barra lateral*/}
 
     <aside className="lateral" > 
-   <Buscador />
-   <Crear  setListadoState={setListadoState}     />
+    <Buscador listadoState={listadoState}  setListadoState = {setListadoState}/>
+   <Crear listadoState={listadoState} setListadoState={setListadoState}     />
     </aside>
 
     <footer className="footer" > &copy; Máster en Javascript ES12 y TypeScript </footer>
